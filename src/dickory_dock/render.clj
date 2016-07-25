@@ -28,7 +28,7 @@
     (utils/html-escape cssdat)
     (try
       (case (:type cssdat)
-        :stylesheet (apply str (map css-to-stylesheet (:rules cssdat)))
+        :stylesheet (s/join " " (map css-to-stylesheet (:rules cssdat)))
         :import (str "@import url('" (:url cssdat) "') " (queries->str cssdat) ";")
         :namespace (str "@namespace " (:prefix cssdat) " url('" (:url cssdat) "');")
         :media (str "@media " (queries->str cssdat) " {" (rules->str cssdat) "}")
